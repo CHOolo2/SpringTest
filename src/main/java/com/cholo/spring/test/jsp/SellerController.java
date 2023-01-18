@@ -22,37 +22,49 @@ public class SellerController {
 	@PostMapping("/add")
 	@ResponseBody
 	public String addSeller(
-			@RequestParam("nickName")String nickName
+			@RequestParam("nickName") String nickName
 			, @RequestParam("temperature") double temperature
-			, @RequestParam("profileImage")String profileImage) {
+			, @RequestParam("profileImage") String profileImage) {
 		
 		int count = sellerBO.addSeller(nickName, temperature, profileImage);
 		
-		return "삽입 결과: " + count;
+		return "삽입 결과 : " + count;
+		
 	}
 	
 	@GetMapping("/input")
 	public String sellerInput() {
-		return "/jsp/seller";
+		return "jsp/sellerinput";
 	}
 	
 	@GetMapping("/info")
 	public String sellerInfo(
-			@RequestParam(value="id", required=false) Integer id
-			,Model model) {
-		Seller seller = null;
-		if(id== null) {
-			seller = sellerBO.getLastSeller();
-		}else {
-			seller = sellerBO.getSeller(id);
-		}
+			@RequestParam(value="id", required=false) Integer id 
+			, Model model) {
+		
+//		Seller seller = null;
+//		if(id == null) {			
+//			seller = sellerBO.getLastSeller();
+//			
+//		} else {
+//			seller = sellerBO.getSeller(id);
+//		}
+		
+		Seller seller = sellerBO.getSeller(id);
+		
 		model.addAttribute("seller", seller);
+		
+		
 		return "jsp/sellerInfo";
 	}
 	
 	@GetMapping("/info/id")
-	public String sellerInfoById(@RequestParam("id") int id,Model model) {
-		return "jsp/sellerInfo";
+	public String sellerInfoById(@RequestParam("id") int id, Model model) {
 		
+		Seller seller = sellerBO.getSeller(id);
+		model.addAttribute("seller", seller);
+		
+		return "jsp/sellerInfo";
 	}
+
 }

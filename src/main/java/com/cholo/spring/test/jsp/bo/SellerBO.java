@@ -12,18 +12,35 @@ public class SellerBO {
 	@Autowired
 	private SellerDAO sellerDAO;
 	
-	public int addSeller(String nickName
+	public int addSeller(
+			String nickName
 			, double temperature
 			, String profileImage) {
+		
+		return sellerDAO.insertSeller(nickName, temperature, profileImage);
+		
+	}
 	
-	return sellerDAO.insertSeller(nickName,temperature,profileImage);
+	public Seller getSeller(Integer id) {
+		
+		if(id == null) {
+			return sellerDAO.selectLastSeller();
+		} else {
+			return sellerDAO.selectSeller(id);
+		}
+		
+	}
 	
 	public Seller getLastSeller() {
+		
 		return sellerDAO.selectLastSeller();
 		
 	}
-	public Seller getSeller(int id) {
-		return sellerDAO.selectLastSeller();
-}
+	
+	public Seller getSellerById(int id) {
+		
+		return sellerDAO.selectSeller(id);
+		
 	}
+
 }
