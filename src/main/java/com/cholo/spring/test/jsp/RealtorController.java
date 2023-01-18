@@ -3,8 +3,8 @@ package com.cholo.spring.test.jsp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cholo.spring.test.jsp.model.Realtor;
 
@@ -19,11 +19,14 @@ import com.cholo.spring.test.jsp.model.Realtor;
 	
 	@GetMapping("/add")
 	public String addRealtor(
-			 @RequestParam("office")String office
-			, @RequestParam("phoneNumber") String phoneNumber
-			, @RequestParam("address") String address
-			, @RequestParam("grade") String grade
+//			 @RequestParam("office")String office
+//			, @RequestParam("phoneNumber") String phoneNumber
+//			, @RequestParam("address") String address
+//			, @RequestParam("grade") String grade
+//			, Model model) {
+			@ModelAttribute Realtor realtor
 			, Model model) {
+		
 		
 		
 //		Realtor realtor = new Realtor();

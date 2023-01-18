@@ -14,6 +14,6 @@ public class RealtorDAO {
 		, @Param("address") String address
 		, @Param("grade") String grade;
 	
-	public Realtor selectRealtor(@Param("id") int id);
+	return Realtor selectRealtor(@Param("id") int id);
 	}
 }
