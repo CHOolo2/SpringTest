@@ -10,6 +10,6 @@ public class Test01Controller {
 
 	@GetMapping("/test01")
 	public String test01() {
-		return "jstl/test01";
+		return "jstl/Test01";
 	}
 }

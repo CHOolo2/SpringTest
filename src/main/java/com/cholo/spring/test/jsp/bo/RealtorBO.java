@@ -12,8 +12,8 @@ public class RealtorBO {
 	@Autowired
 	private RealtorDAO realtroDAO;
 
-	public int addRealtor(Realtor realtor) {
-	
-		return RealtorDAO.realtor("id");
-	}
+//	public int addRealtor(Realtor realtor) {
+//	
+//		return RealtorDAO.realtor("id");
+//	}
 }

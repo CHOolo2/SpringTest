@@ -35,7 +35,7 @@ import com.cholo.spring.test.jsp.model.Realtor;
 //		realtor.setAddress(address);
 //		realtor.setGrade(grade);
 		
-		realtorBO.addRealtor(realtor);
+	//	realtorBO.addRealtor(realtor);
 		
 		model.addAttribute("realtor", realtor);
 		
