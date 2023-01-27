@@ -1,4 +1,4 @@
-package com.cholo.spring.test.jstl.bo;
+/*package com.cholo.spring.test.jstl.bo;
 
 import java.util.Date;
 
@@ -13,10 +13,21 @@ public class WeatherBO {
 	
 	@Autowired
 	private WeatherDAO weatherDAO;
-
-	//WeatherHistory 의 모든 데이터 조회
-	public List <Weather> getWheather() {
-		return weatherDAO.selectWheather();
 	
+	public List<Weather> getWeatherHistory() {
+		return weatherDAO.selectWeather();
 	}
-}
+	
+	public int addWeather(
+			Date date
+			, String weather
+			, double temperatures
+			, double precipitation
+			, String microDust
+			, double windSpeed) {
+		
+		return weatherDAO.insertWeather(date, weather, temperatures, precipitation, microDust, windSpeed);
+		
+	}
+
+}*/

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="com.cholo.spring.test.jstl.dao.WeatherDAO">
 
-	<select id="selectWheather" resultType="com.cholo.spring.test.jstl.model.Weather">
+	<select id="selectWeatherHistory" resultType="com.cholo.spring.test.jstl.model.Weather">
 		SELECT 
-			
 			`id`
+			, `date`
 			, `weather`
 			, `temperatures`
 			, `precipitation`
@@ -17,6 +18,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, `createdAt`
 			, `updatedAt`
 		FROM
-			`WeatherHistory`
+			`weatherhistory`
 	</select>
+	
+	<insert id="insertWeather" parameterType="map">
+		INSERT INTO 
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE 
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, now()
+			, now()
+		)
+		
+	
+	</insert>
+
+
 </mapper>
