@@ -15,4 +15,6 @@ public interface FavoriteDAO {
 	public int insertFavorite(
 		@Param("title") String title
 		, @Param("address") String address);
+	
+	public int selectCountoverlap(@Param("address") String address);
 }

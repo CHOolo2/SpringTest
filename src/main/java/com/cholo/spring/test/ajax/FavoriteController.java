@@ -59,4 +59,17 @@ public class FavoriteController {
 		return "ajax/favorite/input";
 	}
 
+	@PostMapping("/overlapAddress")
+	@ResponseBody
+	public Map<String, Boolean> overlapAddress(@RequestParam("address") String addres){
+		Map<String, Boolean> result = new HashMap<>();
+		
+		if(favoriteBO.overlapAddress(addres)) {
+			result.put("overlapAddress", true);
+		}else {
+			result.put("overlapAddress", false);
+		}
+		//result.put("overlapAddress", favoriteBO.overlapAddress(address));
+		return result;
+	}
 }

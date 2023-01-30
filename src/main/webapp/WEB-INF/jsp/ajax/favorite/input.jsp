@@ -19,12 +19,38 @@
 		<label class="mt-3">제목</label>
 		<input type="text" class="form-control" id="titleInput">
 		<label class="mt-3">주소</label>
-		<input type="text" class="form-control" id="addressInput">
+		<div class="d-flex">
+			<input type="text" class="form-control" id="addressInput">
+			<button type="button" class="btn btn-info" id="overlapBtn">중복확인</button>		
+		</div>
 		<button type="button" class="btn btn-success btn-block mt-3"id="addBtn">추가</button>
 	</div>
 	<script>
 		$(document).ready(funciton(){
 			
+			$("#overlapBtn").on("click", function(){
+				let address = $("#addressInput").val();
+				
+				if(address ==""){
+					alert("주소를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					,url:"/ajax/favorite/overlapAddress"
+					,data:{"address":adddress}
+					,success:function(data){
+						if(data.overlapAddress){
+							alert("중복된 url 입니다");
+						}else{
+							alert("저장 가능한 url 입니다");
+						}
+					}
+					,error:function(){
+						alert("중복확인 에러");
+					}
+			});
 			$("#addBtn").on("click", function() {
 				let title = $("#titleInput").val();
 				let address = $("#addressInput").val();
@@ -37,6 +63,15 @@
 					alert("주소를 입력하세요");
 					return;
 				}
+				
+				//https:// , http://
+				//https로 시작하지 않고 http로 시작하지 않으면
+				//if(!address.startsWith("https://") && !address.startsWith("http://")){
+				if(!(address.startsWith("https://") || address.startsWith("http://"))){
+					alert("주소 형식이 잘못 되었습니다");
+					return;
+				}
+				
 				$.ajax({
 					type:"post"
 					, url:"/ajax/favorite/add"

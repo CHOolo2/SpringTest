@@ -23,4 +23,14 @@ public class FavoriteBO {
 		
 		return favoriteDAO.insertFavorite(title, address);
 	}
+	
+	public boolean overlapAddress(String address) {
+		
+		int count = favoriteDAO.selectCountoverlap(address);
+		if(count == 0) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

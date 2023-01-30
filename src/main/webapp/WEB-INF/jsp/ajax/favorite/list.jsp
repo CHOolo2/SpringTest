@@ -32,10 +32,12 @@
 					<td>${status.count }</td>
 					<td>${favorite.title }</td>
 					<td>${favorite.address }</td>
+					<td><button type="button">삭제</button></td>
 				</tr>
 			</c:forEach>
+			
 			</tbody>
-		
+			
 		</table>
 	</div>
 </body>
