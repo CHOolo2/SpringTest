@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -23,10 +23,30 @@
 			<input type="text" class="form-control" id="addressInput">
 			<button type="button" class="btn btn-info" id="overlapBtn">중복확인</button>		
 		</div>
+		<div class="small text-danger d-none" id="duplicateDiv">중복된 url 입니다</div>
+		<div class="small text-info d-none" id="avaliadleDiv">저장 가능한 url 입니다</div>
 		<button type="button" class="btn btn-success btn-block mt-3"id="addBtn">추가</button>
 	</div>
 	<script>
 		$(document).ready(funciton(){
+			
+			//중복 체크 여부 확인 변수
+			var isChecked = false;
+			
+			//url 중복상태 저장 변수
+			var isDuplicate= true;
+			
+			$("#titleInput").on("input", function(){
+				//중복체크 여부 과정을 모두 취소한다
+				isChecked = false;
+				isDuplicate = true;
+				
+				$("#duplicateDiv").addClass("d-none");
+				$("#avaliadleDiv").addClass("d-none");
+			
+			});
+			
+			
 			
 			$("#overlapBtn").on("click", function(){
 				let address = $("#addressInput").val();
@@ -41,10 +61,17 @@
 					,url:"/ajax/favorite/overlapAddress"
 					,data:{"address":adddress}
 					,success:function(data){
-						if(data.overlapAddress){
-							alert("중복된 url 입니다");
-						}else{
-							alert("저장 가능한 url 입니다");
+						//중복 체크 완료
+						isCheckde = true;
+						
+						if(data.overlapAddress){//중복됨
+							$("#duplicateDiv").removeClass("d-none");
+							$("#avaliadleDiv").addClass("d-none");
+							isDuplicate = true;
+						}else{//사용가능
+							$("#avaliadleDiv").removeClass("d-none");
+							$("#duplicateDiv").addClass("d-none");
+							isDuplicate = false;
 						}
 					}
 					,error:function(){
@@ -71,6 +98,18 @@
 					alert("주소 형식이 잘못 되었습니다");
 					return;
 				}
+				
+				//url 중복체크를 했는지 유효성 검사
+				if(!isChecked){
+					alert("중복체크를 진행해주세요");
+					return;
+				}
+				//url이 중복되었는지 유효성 검사
+				if(isDuplicate){
+					alert("url 주소가 중복되었습니다");
+					return;
+				}
+				
 				
 				$.ajax({
 					type:"post"
