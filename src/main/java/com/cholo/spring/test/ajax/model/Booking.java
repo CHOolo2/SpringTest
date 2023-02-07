@@ -6,12 +6,12 @@ public class Booking {
 
 	private int id;
 	private String name;
-	private String headcount;
-	private String day;
+	private int headcount;
+	private int day;
 	private Date date;
 	private String phoneNumber;
 	private String state;
-	private Date creatdAt;
+	private Date createdAt;
 	private Date updatedAt;
 	public int getId() {
 		return id;
@@ -25,16 +25,16 @@ public class Booking {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getHeadcount() {
+	public int getHeadcount() {
 		return headcount;
 	}
-	public void setHeadcount(String headcount) {
+	public void setHeadcount(int headcount) {
 		this.headcount = headcount;
 	}
-	public String getDay() {
+	public int getDay() {
 		return day;
 	}
-	public void setDay(String day) {
+	public void setDay(int day) {
 		this.day = day;
 	}
 	public Date getDate() {
@@ -55,11 +55,11 @@ public class Booking {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Date getCreatdAt() {
-		return creatdAt;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreatdAt(Date creatdAt) {
-		this.creatdAt = creatdAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public Date getUpdatedAt() {
 		return updatedAt;
